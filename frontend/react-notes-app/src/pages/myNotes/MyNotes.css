@@ -1,0 +1,258 @@
+.myNotesBox {
+    width: 95vw;
+    margin: 0vh auto 5vh;
+    height: auto;
+    padding: 2vw 0;
+    background-color: #DAE1EE;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.searchField {
+    width: 95vw;
+    padding: 20px 20px 0px;
+    background-color: #DAE1EE;
+    margin: 5vh auto 0;
+}
+
+form.d-flex {
+    width: 60vw;
+    margin: 0px auto;
+}
+
+
+
+.note{
+    background-color: #E5CAEF;
+    border: 1px solid #8e05aa;
+    border-radius: 20px 0px 20px 0px;
+    -webkit-border-radius: 20px 0px 20px 0px;
+    -moz-border-radius: 20px 0px 20px 0px;
+    -ms-border-radius: 20px 0px 20px 0px;
+    -o-border-radius: 20px 0px 20px 0px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.note-foote-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+
+.note-footer {
+    display: flex;
+    align-items: center;
+}
+
+.footer-icons {
+    display: flex;
+    justify-content: end;
+    width: 50%;
+}
+
+.footer-date {
+    width: 50%;
+    text-align: left;
+}
+
+
+.note {
+    width: 29.6vw !important;
+    margin: 1vw;
+    height: 250px;
+}
+
+.note h4 {
+    font-size: 18px;
+    height: 40px;
+    text-align: left;
+}
+
+.note p {
+    height: 115px;
+    max-height: 115px;
+    overflow: hidden;
+    text-align: left;
+    line-height: normal;
+}
+
+.note a.nav-link {
+    padding: 0px !important;
+}
+
+button.btnView.btn.btn-primary:hover {
+    color: #fff;
+    background-color: #8e05aa;
+}
+
+
+button.btnView.btn.btn-primary {
+    margin-right: 0px;
+    padding: 2px 5px;
+    border-radius: 20px;
+    color: #E5CAEF;
+    background-color: #8e05aa;
+    width: 112px;
+}
+
+.footer-date {
+    font-size: 11px;
+}
+
+.note-footer {
+    margin: 20px 0px;
+}
+
+.viewFormButtons {
+    display: flex;
+    justify-content: end;
+}
+
+button.btnClose.btn.btn-secondary {
+    margin-right: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.viewFormDate, .viewFormButtons {
+    width: 48%;
+}
+
+.viewFormDate span {
+    font-size: 14px;
+    font-style: italic;
+}
+
+.modelBody.modal-body, .modal-footer {
+    background: linear-gradient(90deg, rgba(229,202,239,1) 0%, rgba(230,175,250,1) 0%, rgba(252,244,255,1) 31%, rgba(252,244,255,1) 67%, rgba(232,181,251,1) 100%);
+}
+
+.viewFormButtons button {
+    background-color: #d655f1;
+    border-color: #8e05aa;
+    padding: 8px 30px;
+    border-radius: 10px 0px 10px 0px;
+}
+
+.viewFormButtons button:hover{
+background-color: #fff;
+    color: #d655f1;
+    border-color: #8e05aa;
+}
+
+button.btn-close {
+    background-color: #fff;
+    opacity: 1;
+}
+
+.modelHeader.modal-header {
+    background-color: #d655f1;
+    color: #fff;
+}
+
+.modal-title.h4 img {
+    width: 40px;
+}
+
+.modal-dialog.modal-lg {
+    margin-top: 80px;
+}
+
+.modal-content {
+    border: 1px solid #8e05aa;
+}
+
+
+
+
+@media(max-width:595px){
+    form.d-flex {
+        width: 90vw;
+    }
+
+    .searchField {
+        width: 100%;
+        margin: 0px;
+    }
+
+    .myNotesBox {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .note {
+        width: 90vw !important;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+}
+
+@media(max-width:430px){
+    .note-foote-icons a.nav-link button {
+        margin: 0px !important;
+    }
+
+    .note-foote-icons a.nav-link {
+        margin-right: 15px;
+    }
+    
+    .note-footer {
+        flex-direction: column-reverse;
+    }
+    
+    .footer-date {
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+    }
+    
+    .note-foote-icons {
+        width: 200px;
+    }
+    
+    .footer-icons {
+        justify-content: center;
+    }
+    .footer-date {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (min-width:595px) and (max-width:1200px) {
+    .note-foote-icons a.nav-link button {
+        margin: 0px !important;
+    }
+
+    .note-foote-icons a.nav-link {
+        margin-right: 15px;
+    }
+    
+    .note-footer {
+        flex-direction: column-reverse;
+    }
+    
+    .footer-date {
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+    }
+    
+    .note-foote-icons {
+        width: 200px;
+    }
+    
+    .footer-icons {
+        justify-content: center;
+    }
+    .footer-date {
+        font-size: 10px;
+    }
+}

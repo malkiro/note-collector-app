@@ -1,0 +1,72 @@
+.login {
+    width: 400px;
+    background-color: #eee;
+    padding: 20px;
+    margin: 70px auto 0px;
+    border-radius: 30px 0px;
+}
+
+.login .bottom-text {
+    display: flex;
+    justify-content: center;
+
+}
+
+.login label {
+    text-align: left;
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+.login a.nav-link {
+    padding: 0px 5px !important;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: underline;
+    color: #d655f1;
+}
+
+
+.login input.form-control {
+    border-radius: 10px !important;
+}
+
+.login button.btn.btn-primary {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.login p.bottom-text {
+    text-align: right;
+    padding-top: 15px;
+}
+
+.login h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button.googleSignin {
+    border: 1px solid #ddd;
+    padding: 4px 20px;
+    width: 97%;
+    border-radius: 7px;
+    background-color: #fff;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+}
+
+button.googleSignin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+}
+
+.unpwSignin {
+    margin: 20px auto;
+    color: #999;
+}
+

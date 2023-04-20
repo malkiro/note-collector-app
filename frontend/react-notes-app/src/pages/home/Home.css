@@ -1,0 +1,54 @@
+body{
+height: auto;
+   width: 100%;
+   background-image: url(../../assets/homepage_backgroud.png);
+   background-repeat: no-repeat, no-repeat;
+   background-position: right, left; 
+    background-size: cover;
+}
+
+.introText {
+    width: 50%;
+    margin: 0px auto;
+    padding-top: 12vh;
+}
+
+.introText h2 {
+    margin-bottom: 30px;
+}
+
+.introText h5 {
+    margin-bottom: 20px;
+}
+
+.backgoundImage button.btn.btn-success {
+    font-size: 20px;
+    padding: 8px 30px;
+    margin-top: 20px;
+}
+
+.greetings h1 {
+    margin-bottom: 40px;
+}
+
+a.nav-link.home {
+    width: 280px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+
+
+
+@media(max-width:595px){
+    a.nav-link.home {
+        padding-left: 20px !important;
+    }
+
+    body{
+        height: 100vh;
+    }
+
+}
+    
+

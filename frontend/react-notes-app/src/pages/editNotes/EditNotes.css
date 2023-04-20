@@ -1,0 +1,106 @@
+.editNotes {
+    padding-top: 30px;
+    /* height: 90vh;
+    background: rgb(235,202,242);
+background: linear-gradient(0deg, rgba(235,202,242,1) 0%, rgba(145,198,201,1) 39%, rgba(244,236,236,1) 100%); */
+}
+
+.editNotesBox{
+    width: 60%;
+    margin: 0px auto;
+    border: 1px solid #8e05aa;
+    padding: 30px;
+    border-radius: 30px 0px;
+    background-color: #E5CAEF;
+}
+
+label.form-label {
+    text-align: left;
+    display: block;
+}
+
+input#formBasicTitle,
+textarea#formBasicContent {
+    box-shadow: none;
+    border-color: #d655f1;
+    border-radius: 12px 0px;
+    -webkit-border-radius: 12px 0px;
+    -moz-border-radius: 12px 0px;
+    -ms-border-radius: 12px 0px;
+    -o-border-radius: 12px 0px;
+}
+
+.btnSaveNote {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+}
+
+button.btn.btn-primary {
+    background-color: #d655f1;
+    border-color: #8e05aa;
+    padding: 8px 30px;
+    border-radius: 10px 0px 10px 0px;
+    -webkit-border-radius: 10px 0px 10px 0px;
+    -moz-border-radius: 10px 0px 10px 0px;
+    -ms-border-radius: 10px 0px 10px 0px;
+    -o-border-radius: 10px 0px 10px 0px;
+}
+
+button.btnGoBack.btn.btn-primary {
+    margin-right: 20px;
+}
+
+button.btn.btn-primary:hover {
+    background-color: #fff;
+    color: #d655f1;
+}
+
+.btnSaveNote a.nav-link {
+    padding: 0px !important;
+}
+
+img.swal2-image {
+    width: 100px;
+    margin: 20px auto;
+}
+
+.swal2-popup {
+    border-radius:50px 0px 50px 0px !important;
+    border: 3px solid #8e05aa !important;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(232,254,255,1) 49%, rgba(241,211,249,1) 100%) !important;
+    -webkit-border-radius:50px 0px 50px 0px !important;
+    -moz-border-radius:50px 0px 50px 0px !important;
+    -ms-border-radius:50px 0px 50px 0px !important;
+    -o-border-radius:50px 0px 50px 0px !important;
+}
+
+button.swal2-confirm.swal2-styled {
+    background-color: #d655f1 !important;
+    border:1px solid #8e05aa !important;
+    width: 120px;
+    border-radius: 20px 0px 20px 0px !important;
+    -webkit-border-radius: 20px 0px 20px 0px !important;
+    -moz-border-radius: 20px 0px 20px 0px !important;
+    -ms-border-radius: 20px 0px 20px 0px !important;
+    -o-border-radius: 20px 0px 20px 0px !important;
+}
+
+button.swal2-confirm.swal2-styled:hover {
+    background-color: #fff !important;
+    color: #d655f1 !important;
+}
+
+h2#swal2-title {
+    padding-top: 0px;
+}
+
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+    background: rgba(0,0,0,.8);
+}
+
+@media(max-width:840px){
+    .editNotesBox {
+        width: 90%;
+    }
+}

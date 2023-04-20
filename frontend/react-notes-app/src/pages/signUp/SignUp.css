@@ -1,0 +1,54 @@
+.signUp {
+    width: 400px;
+    background-color: #eee;
+    padding: 20px;
+    margin: 70px auto 0px;
+    border-radius: 30px 0px;
+}
+
+.signUp .bottom-text {
+    display: flex;
+    justify-content: center;
+
+}
+
+.signUp a.nav-link {
+    padding: 0px 5px !important;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: underline;
+    color: #d655f1;
+}
+
+
+.signUp input.form-control {
+    border-radius: 10px !important;
+}
+
+.signUp button.btn.btn-primary {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.signUp p.bottom-text {
+    text-align: center;
+}
+
+.signUp h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signUp label {
+    text-align: left;
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+h2#swal2-title {
+    margin-top: 20px;
+}
+
+.swal2-actions:not(.swal2-loading) .swal2-styled:hover {
+    background-image: none;
+}

@@ -1,0 +1,109 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark {
+    background-color: #8e05aa !important;
+}
+
+form.d-flex input {
+    border-radius: 12px 0px;
+    box-shadow: none;
+}
+
+.logout button.btn.btn-outline-success {
+    padding: 4px 50px;
+    background-color: #eec4fc;
+    border-color: #d655f1;
+    color: #8e05aa;
+    border-radius: 20px;
+}
+
+.logout button.btn.btn-outline-success:hover {
+    border-color: #eec4fc;
+    color: #8e05aa;
+    background-color: #fff;
+}
+
+span.flex.align-center.justify-center svg {
+    margin-top: -7px;
+}
+
+span.flex.align-center.justify-center {
+    padding-right: 5px;
+}
+
+a.nav-link {
+    font-size: 18px;
+    padding: 8px 20px !important;
+}
+
+.headerRightWrapper {
+    width: 40% !important;
+    display: flex;
+    color: #fff;
+    align-items: center;
+}
+
+.date {
+    padding-left: 0px;
+    width:100%
+}
+
+.logout {
+    margin-right: 40px;
+}
+
+.logout a.nav-link {
+    padding: 0px !important;
+}
+
+@media(max-width:992px){
+    a.nav-link {
+        text-align: left;
+        padding-left: 10px !important;
+        font-size: 16px;
+    }
+
+    span.navbar-brand {
+        text-align: left;
+        display: block;
+        padding-left: 10px !important;
+        margin-right: 0px;
+        padding-right: 10px;
+        margin-top: 10px;
+    }
+
+    .me-auto.my-2.my-lg-0.navbar-nav.navbar-nav-scroll {
+        max-height: 130px !important;
+    }
+
+    span.navbar-brand span {
+        display: none;
+    }
+
+    form.d-flex {
+        flex-direction: column;
+    }
+
+    form.d-flex button {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .headerRightWrapper {
+        flex-direction: column;
+    }
+
+    .logout {
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+    
+    .introText {
+        width: 90%;
+    }
+
+    .headerRightWrapper {
+        width: 200px !important;
+    }
+}
+
+
+
