@@ -26,13 +26,12 @@ export default function EditNotes() {
     title: "",
     description: "",
     date: "",
-    file_path: ""
 });
 
 const {title, description } = note;
 
 // const [imgSrc, setImgSrc] = useState(null);
-const [file, setFile] = useState(null);
+// const [file, setFile] = useState(null);
 
 /////////////////////////////
 
@@ -77,6 +76,7 @@ const [imgSrc, setImgSrc] = useState('');
 
 
 const handleRemoveImage = () => {
+  setImgFile(null);
   setImgSrc(null);
 };
 
@@ -94,16 +94,19 @@ useEffect(() => {
 }, [])
 
 
-
+// const formData = new FormData();
+// formData.append("title", note.title);
+// formData.append("description", note.description);
+// formData.append("image", imgFile);
 
 const onSubmit = async (e)=>{
   e.preventDefault();
   try {
     const formData = new FormData();
-    if (title) formData.append('title', title);
-    if (description) formData.append('description', description);
-    // if (file) formData.append('file_path', file);
-      if (imgFile) formData.append('image', imgFile);
+    if (note.title) formData.append('title', note.title);
+    if (note.description) formData.append('description', note.description);
+    if (note.image) formData.append('image', note.image);
+    if (imgFile) formData.append('image', imgFile);
 
     const res = await axios.put(`http://localhost:8080/note/${id}`, formData)
     .then(function (response) {
@@ -169,11 +172,21 @@ const loadEditNote = async () => {
 {/* <div>
     {imgSrc ? <img src={imgSrc} alt="Note pic" /> : null}
   </div> */}
+    
+    <Form.Label>Photo</Form.Label>
+      <div className='imageSection'>
+      <div className='imageSectionButtons'>
+      <input type="file" accept="image/*" onChange={handleImageChange} />
+      {/* <button className='imageResetButton' type="reset" onClick={handleRemoveImage} >Remove Photo</button> */}
+      </div>
+  <div>
   {imgSrc ? <img src={imgSrc} alt="Note pic" /> : null}
-    <input type="file" accept="image/*" onChange={handleImageChange} />
+  </div>   
+
+      </div>
 
       {/* <input type="file" accept="image/*" onChange={e => setSelectedImage(e.target.files[0])} /> */}
-      <button type="reset" onClick={handleRemoveImage} >Remove Photo</button>
+      {/* <button type="reset" onClick={handleRemoveImage} >Remove Photo</button> */}
 {/* {selectedImage && (
   <div>
     <img src={URL.createObjectURL(selectedImage)} alt="Selected" />

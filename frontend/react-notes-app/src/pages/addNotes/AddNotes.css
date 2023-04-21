@@ -61,6 +61,26 @@ img.swal2-image {
     margin: 20px auto;
 }
 
+.imageSection{
+    border: 1px solid;
+    border-color: #d655f1;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.imageSectionButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+button.imageResetButton {
+    border-radius: 2px;
+    border: 1px solid #777 !important;
+    padding: 2px 6px !important;
+}
+
 .swal2-popup {
     border-radius:50px 0px 50px 0px !important;
     border: 3px solid #8e05aa !important;

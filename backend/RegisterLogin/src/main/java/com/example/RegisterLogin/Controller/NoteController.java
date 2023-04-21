@@ -154,9 +154,38 @@ public class NoteController {
             String filePath = FOLDER_PATH + file.getOriginalFilename();
             file.transferTo(new File(filePath));
             note.setFile_path("/images/" + file.getOriginalFilename());
-        } else {
-            note.setFile_path(null); // set file path to null if file is null or empty
         }
+
+//        if(filePath == null) {
+//            note.setFile_path(null);
+//        }
+
+//        if (file != null && !file.isEmpty()) {
+//            String filePath = FOLDER_PATH + file.getOriginalFilename();
+//            file.transferTo(new File(filePath));
+//            note.setFile_path("/images/" + file.getOriginalFilename());
+//        } else {
+//            // If the file is null, set the previous file path
+//            String previousFilePath = note.getFile_path();
+//            if (previousFilePath != null && !previousFilePath.isEmpty()) {
+//                note.setFile_path(previousFilePath);
+//            } else {
+//                note.setFile_path(null);
+//            }
+//        }
+
+
+
+//
+//        if (file != null && !file.isEmpty()) {
+//            String filePath = FOLDER_PATH + file.getOriginalFilename();
+//            file.transferTo(new File(filePath));
+//            note.setFile_path("/images/" + file.getOriginalFilename());
+//        } else if (file == null && note.getFile_path() != null) {
+//            // if image is not present in the request, but the note already has an image
+//            // set the file_path to null
+//            note.setFile_path(null);
+//        }
 
         return noteRepository.save(note);
     }

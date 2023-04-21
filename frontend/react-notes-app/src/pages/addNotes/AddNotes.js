@@ -87,9 +87,9 @@ const handleClear = () => {
 };
 
 const handleRemoveImage = (e) => {
-    setSelectedImage(null);
-  };
-
+  setSelectedImage(null);
+  document.getElementById("input-file").value = "";
+};
 
   return (
     <div>
@@ -108,14 +108,20 @@ const handleRemoveImage = (e) => {
         <Form.Control as="textarea" rows={4} placeholder="Note content here...." name="description" value={description} onChange={(e)=>onInputChange(e)}/>
       </Form.Group>
 
-      <input type="file" accept="image/*" onChange={e => setSelectedImage(e.target.files[0])} />
-      <button type="reset" onClick={handleRemoveImage} >Remove Photo</button>
+      <Form.Label>Photo</Form.Label>
+      <div className='imageSection'>
+      <div className='imageSectionButtons'>
+      <input className='imageChooseButton' id="input-file" type="file" accept="image/*" onChange={e => setSelectedImage(e.target.files[0])} />
+      {selectedImage && (
+      <button className='imageResetButton' type="reset" onClick={handleRemoveImage} >Remove Photo</button>
+      )}
+      </div>
 {selectedImage && (
   <div>
-    <p>Selected image:</p>
-    <img src={URL.createObjectURL(selectedImage)} alt="Selected" />
-  </div>
+    <img className='imageBlock' src={URL.createObjectURL(selectedImage)} alt="Selected" />
+  </div>   
 )}
+      </div>
       {/* {uploadProgress > 0 && <p>Upload progress: {uploadProgress}%</p>} */}
       {/* <img/> */}
 

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../../assets/notes_icon.png';
 import NavigationBar from '../../components/navigationBar/NavigationBar';
+import { IoMdDownload } from "react-icons/io";
 
 function ViewNote() {
   const imgURL = 'http://localhost:8080';
@@ -15,6 +16,16 @@ function ViewNote() {
         description:"",
         date:""
       })
+
+      const downloadImage = (url) => {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = url.split('/').pop();
+        link.target = '_blank'; // Add target="_blank" to open in new tab
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
 
       const {id} = useParams()
     
@@ -47,11 +58,21 @@ function ViewNote() {
       <Card.Header><img src={Logo} alt='Logo' /> {note.title}</Card.Header>
       <Card.Body>
         <Card.Text>
-          {note.description}
-          {note.file_path ? (
-            <img src={`${imgURL}/${note.file_path}`} alt="Note pic" />
-          ) : null}
-        </Card.Text>
+        <div className='descriptionSec'>{note.description}</div>
+        <div className='imageSec'>
+  {note.file_path && (
+    <>
+      <img src={`${imgURL}/${note.file_path}`} alt="Note pic" />
+      <div>
+      <button className='btnImageDownload' onClick={() => downloadImage(`${imgURL}/${note.file_path}`)}>
+        <IoMdDownload size={20} color="#8e05aa" />
+        Download Image
+      </button>
+      </div>
+    </>
+  )}
+</div>
+          </Card.Text>
         {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
         <Link className="nav-link" to={`/mynotes`}><Button variant="primary">Go Back to My Notes</Button></Link>
       </Card.Body>

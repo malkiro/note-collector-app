@@ -16,6 +16,24 @@
     -o-border-radius: 48px 48px 0px 0px !important;
 }
 
+button.btnImageDownload {
+    background-color: #fff;
+    border: 1px solid;
+    color: #8e05aa;
+    font-weight: 600;
+    padding: 4px 20px;
+    border-radius: 20px;
+}
+
+
+.descriptionSec {
+    margin-bottom: 30px;
+}
+
+.viewNote a.nav-link {
+    width: 260px;
+    margin: 0px auto;
+}
 
 .card-body, .text-muted.card-footer {
     background: linear-gradient(90deg, rgba(229,202,239,1) 0%, rgba(230,175,250,1) 0%, rgba(252,244,255,1) 31%, rgba(252,244,255,1) 67%, rgba(232,181,251,1) 100%);
