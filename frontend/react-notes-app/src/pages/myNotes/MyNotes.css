@@ -20,8 +20,6 @@ form.d-flex {
     margin: 0px auto;
 }
 
-
-
 .note{
     background-color: #E5CAEF;
     border: 1px solid #8e05aa;
@@ -72,8 +70,8 @@ form.d-flex {
 }
 
 .note p {
-    height: 115px;
-    max-height: 115px;
+    height: 110px;
+    max-height: 110px;
     overflow: hidden;
     text-align: left;
     line-height: normal;

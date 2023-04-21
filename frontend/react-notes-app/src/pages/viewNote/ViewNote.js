@@ -9,36 +9,35 @@ import NavigationBar from '../../components/navigationBar/NavigationBar';
 import { IoMdDownload } from "react-icons/io";
 
 function ViewNote() {
+  const { id } = useParams()
   const imgURL = 'http://localhost:8080';
 
-    const [note, setNote] = useState({
-        title:"",
-        description:"",
-        date:""
-      })
+  const [note, setNote] = useState({
+    title: "",
+    description: "",
+    date: ""
+  })
 
-      const downloadImage = (url) => {
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = url.split('/').pop();
-        link.target = '_blank'; // Add target="_blank" to open in new tab
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      };
+  useEffect(() => {
+    loadNote();
+  }, [])
 
-      const {id} = useParams()
-    
-      useEffect(()=>{
-        loadNote();
-      }, [])
-    
-      const loadNote = async () => {
-        const result = await axios.get(`http://localhost:8080/note/${id}`);
-        setNote(result.data);
-      }
+  const downloadImage = (url) => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = url.split('/').pop();
+    link.target = '_blank'; // Add target="_blank" to open in new tab
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
-      // Convert the date string to a Date object
+  const loadNote = async () => {
+    const result = await axios.get(`http://localhost:8080/note/${id}`);
+    setNote(result.data);
+  }
+
+  // Convert the date string to a Date object
   const date = new Date(note.date);
 
   // Format the date using toLocaleString()
@@ -53,31 +52,30 @@ function ViewNote() {
 
   return (
     <div>
-      <NavigationBar/>
-    <Card className='viewNote'>
-      <Card.Header><img src={Logo} alt='Logo' /> {note.title}</Card.Header>
-      <Card.Body>
-        <Card.Text>
-        <div className='descriptionSec'>{note.description}</div>
-        <div className='imageSec'>
-  {note.file_path && (
-    <>
-      <img src={`${imgURL}/${note.file_path}`} alt="Note pic" />
-      <div>
-      <button className='btnImageDownload' onClick={() => downloadImage(`${imgURL}/${note.file_path}`)}>
-        <IoMdDownload size={20} color="#8e05aa" />
-        Download Image
-      </button>
-      </div>
-    </>
-  )}
-</div>
+      <NavigationBar />
+      <Card className='viewNote'>
+        <Card.Header><img src={Logo} alt='Logo' /> {note.title}</Card.Header>
+        <Card.Body>
+          <Card.Text>
+            <div className='descriptionSec'>{note.description}</div>
+            <div className='imageSec'>
+              {note.file_path && (
+                <>
+                  <img src={`${imgURL}/${note.file_path}`} alt="Note pic" />
+                  <div>
+                    <button className='btnImageDownload' onClick={() => downloadImage(`${imgURL}/${note.file_path}`)}>
+                      <IoMdDownload size={20} color="#8e05aa" />
+                      Download Image
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </Card.Text>
-        {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-        <Link className="nav-link" to={`/mynotes`}><Button variant="primary">Go Back to My Notes</Button></Link>
-      </Card.Body>
-      <Card.Footer className="text-muted">Added Date & Time: {formattedDate}</Card.Footer>
-    </Card>
+          <Link className="nav-link" to={`/mynotes`}><Button variant="primary">Go Back to My Notes</Button></Link>
+        </Card.Body>
+        <Card.Footer className="text-muted">Added Date & Time: {formattedDate}</Card.Footer>
+      </Card>
     </div>
   );
 }

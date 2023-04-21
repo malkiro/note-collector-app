@@ -27,6 +27,10 @@ background: linear-gradient(0deg, rgba(235,202,242,1) 0%, rgba(145,198,201,1) 39
     margin-bottom: 20px;
 }
 
+.imageSection img {
+    max-width: 100%;
+    height: auto;
+}
 
 button.imageResetButton {
     border-radius: 2px;

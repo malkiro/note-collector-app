@@ -23,6 +23,12 @@ button.btnImageDownload {
     font-weight: 600;
     padding: 4px 20px;
     border-radius: 20px;
+    margin-top: 20px;
+}
+
+.imageSec img {
+    max-width: 100%;
+    height: auto;
 }
 
 

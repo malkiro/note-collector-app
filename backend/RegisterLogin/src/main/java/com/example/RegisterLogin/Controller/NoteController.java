@@ -39,19 +39,6 @@ public class NoteController {
         }
         return noteRepository.save(note);
     }
-//    public Note saveNote(@RequestBody Note note){
-//        return noteRepository.save(note);
-//    }
-
-//    public Note saveNote(@RequestParam(value = "title", required = false)String title, @RequestParam(value = "description", required = false) String description, @RequestParam(value = "image", required = false) MultipartFile file) throws IOException {
-//        String filePath = FOLDER_PATH+file.getOriginalFilename();
-//
-//        Note save = noteRepository.save(new Note(title, description, "/images/"+file.getOriginalFilename()));
-//        if(file != null && !file.isEmpty()) {
-//            file.transferTo(new File(filePath));
-//        }
-//        return save;
-//    }
 
     /*get all notes*/
     @GetMapping("/notes")
@@ -71,63 +58,6 @@ public class NoteController {
 
 
     @PutMapping("/note/{id}")
-//    public Note updateNote(@PathVariable Long id, @RequestBody Note newNote,
-//                           @RequestParam(value = "title", required = false) String title,
-//                           @RequestParam(value = "description", required = false) String description,
-//    @RequestParam(value = "image", required = false) MultipartFile file) {
-//        if (title != null) {
-//            newNote.setTitle(title);
-//        }
-//        if (description != null) {
-//            newNote.setDescription(description);
-//        }
-//        return noteRepository.findById(id)
-//                .map(note -> {
-//                    note.setTitle(newNote.getTitle());
-//                    note.setDescription(newNote.getDescription());
-//                            if (file != null && !file.isEmpty()) {
-//            String filePath = FOLDER_PATH + file.getOriginalFilename();
-//            try {
-//                file.transferTo(new File(filePath));
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            note.setFile_path("/images/" + file.getOriginalFilename());
-//        }
-//                    return noteRepository.save(note);
-//                })
-//                .orElseThrow(() -> new NoteNotFoundException(id));
-//    }
-
-
-//        public Note updateNote(@PathVariable Long id, @RequestBody Note newNote,
-//                           @RequestParam(value = "title", required = false) String title,
-//                           @RequestParam(value = "description", required = false) String description,
-//                           @RequestParam(value = "image", required = false) MultipartFile file) throws IOException {
-//        return noteRepository.findById(id)
-//                .map(note -> {
-//                            if (title != null) {
-//            note.setTitle(title);
-//        }
-//
-//        if (description != null) {
-//            note.setDescription(description);
-//        }
-//
-//        if (file != null && !file.isEmpty()) {
-//            String filePath = FOLDER_PATH + file.getOriginalFilename();
-//            try {
-//                file.transferTo(new File(filePath));
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            note.setFile_path("/images/" + file.getOriginalFilename());
-//        }
-//
-//        return noteRepository.save(note);
-//                }).orElseThrow(()->new NoteNotFoundException(id));
-//    }
-
     public Note updateNote(@PathVariable Long id,
                            @RequestParam(value = "title", required = false) String title,
                            @RequestParam(value = "description", required = false) String description,
@@ -143,60 +73,13 @@ public class NoteController {
             note.setDescription(description);
         }
 
-
-//        if (file != null && !file.isEmpty()) {
-//            String filePath = FOLDER_PATH + file.getOriginalFilename();
-//            file.transferTo(new File(filePath));
-//            note.setFile_path("/images/" + file.getOriginalFilename());
-//        }
-
         if (file != null && !file.isEmpty()) {
             String filePath = FOLDER_PATH + file.getOriginalFilename();
             file.transferTo(new File(filePath));
             note.setFile_path("/images/" + file.getOriginalFilename());
         }
-
-//        if(filePath == null) {
-//            note.setFile_path(null);
-//        }
-
-//        if (file != null && !file.isEmpty()) {
-//            String filePath = FOLDER_PATH + file.getOriginalFilename();
-//            file.transferTo(new File(filePath));
-//            note.setFile_path("/images/" + file.getOriginalFilename());
-//        } else {
-//            // If the file is null, set the previous file path
-//            String previousFilePath = note.getFile_path();
-//            if (previousFilePath != null && !previousFilePath.isEmpty()) {
-//                note.setFile_path(previousFilePath);
-//            } else {
-//                note.setFile_path(null);
-//            }
-//        }
-
-
-
-//
-//        if (file != null && !file.isEmpty()) {
-//            String filePath = FOLDER_PATH + file.getOriginalFilename();
-//            file.transferTo(new File(filePath));
-//            note.setFile_path("/images/" + file.getOriginalFilename());
-//        } else if (file == null && note.getFile_path() != null) {
-//            // if image is not present in the request, but the note already has an image
-//            // set the file_path to null
-//            note.setFile_path(null);
-//        }
-
         return noteRepository.save(note);
     }
-//    public Note updateNote(@RequestBody Note newNote, @PathVariable Long id){
-//        return noteRepository.findById(id)
-//                .map(note -> {
-//                    note.setTitle(newNote.getTitle());
-//                    note.setDescription(newNote.getDescription());
-//                    return noteRepository.save(note);
-//                }).orElseThrow(()->new NoteNotFoundException(id));
-//    }
 
     @DeleteMapping("/note/{id}")
         String deleteNote(@PathVariable Long id){

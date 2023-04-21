@@ -6,140 +6,113 @@ import './AddNotes.css';
 import Swal from 'sweetalert2';
 import noteAdd from "../../assets/note-add.png";
 import NavigationBar from '../../components/navigationBar/NavigationBar';
-import { useRef } from "react";
 
 export default function AddNotes() {
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const clearPhoto = () => {
-    setSelectedImage(null);
-  }
-  
-
-  /////////////////////////////////////
-
   const [note, setNote] = useState({
     title: "",
     description: "",
     file_path: ""
-});
+  });
+
+  const { title, description } = note;
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const formData = new FormData();
+  formData.append("title", note.title);
+  formData.append("description", note.description);
+  formData.append("image", selectedImage);
 
 
-
-const {title, description } = note;
-
-
-const formData = new FormData();
-formData.append("title", note.title);
-formData.append("description", note.description);
-formData.append("image", selectedImage);
+  const onInputChange = (e) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
+  };
 
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:8080/note", formData)
+      .then(function (response) {
+        setNote({
+          title: "",
+          description: "",
+        });
+        setSelectedImage(null);
+        document.getElementById("input-file").value = "";
+        Swal.fire({
+          title: 'Note Added Successfully',
+          imageUrl: noteAdd,
+          closeOnClickOutside: false,
+        }
+        )
+      })
+      .catch(function (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
+      });
+  };
 
 
-const onInputChange=(e)=>{
-    setNote({...note, [e.target.name]:e.target.value });
-};
-
-// const onSubmit = async (e)=>{
-//   e.preventDefault();
-//   await axios.post("http://localhost:8080/note",note)
-//   // navigate("/mynotes")
-// };
-
-const onSubmit = async (e)=>{
-  e.preventDefault();
-  await axios.post("http://localhost:8080/note", formData
-  // , {
-  // headers: { "Content-Type": "multipart/form-data" },
-// }
-)
-  // await axios.post("http://localhost:8080/note",note)
-  .then(function (response) {
+  const handleClear = () => {
     setNote({
       title: "",
       description: "",
     });
     setSelectedImage(null);
-    Swal.fire({
-      title: 'Note Added Successfully',
-      imageUrl:noteAdd,
-      closeOnClickOutside: false,
-    }
-    )
-  })
-  .catch(function (error) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong!',
-    })
-  });
-};
+    document.getElementById("input-file").value = "";
+  };
 
 
-const handleClear = () => {
-  setNote({
-    title: "",
-    description: "",
-  });
-  setSelectedImage(null);
-};
-
-const handleRemoveImage = (e) => {
-  setSelectedImage(null);
-  document.getElementById("input-file").value = "";
-};
+  const handleRemoveImage = (e) => {
+    setSelectedImage(null);
+    document.getElementById("input-file").value = "";
+  };
 
   return (
     <div>
-      <NavigationBar/>
+      <NavigationBar />
       <div className="addNotes">
-      <div className="addNotesBox">
-      <h3>Add New Notes</h3>
-      <Form onSubmit={(e) => onSubmit(e)}>
-      <Form.Group className="mb-3" controlId="formBasicTitle">
-        <Form.Label>Title</Form.Label>
-        <Form.Control type="title" placeholder="Note title here...." name="title" value={title} onChange={(e)=>onInputChange(e)}/>
-      </Form.Group>
+        <div className="addNotesBox">
+          <h3>Add New Notes</h3>
+          <Form onSubmit={(e) => onSubmit(e)}>
+            <Form.Group className="mb-3" controlId="formBasicTitle">
+              <Form.Label>Title</Form.Label>
+              <Form.Control type="title" placeholder="Note title here...." name="title" value={title} onChange={(e) => onInputChange(e)} />
+            </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicContent">
-        <Form.Label>Content</Form.Label>
-        <Form.Control as="textarea" rows={4} placeholder="Note content here...." name="description" value={description} onChange={(e)=>onInputChange(e)}/>
-      </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicContent">
+              <Form.Label>Content</Form.Label>
+              <Form.Control as="textarea" rows={4} placeholder="Note content here...." name="description" value={description} onChange={(e) => onInputChange(e)} />
+            </Form.Group>
 
-      <Form.Label>Photo</Form.Label>
-      <div className='imageSection'>
-      <div className='imageSectionButtons'>
-      <input className='imageChooseButton' id="input-file" type="file" accept="image/*" onChange={e => setSelectedImage(e.target.files[0])} />
-      {selectedImage && (
-      <button className='imageResetButton' type="reset" onClick={handleRemoveImage} >Remove Photo</button>
-      )}
+            <Form.Label>Photo</Form.Label>
+            <div className='imageSection'>
+              <div className='imageSectionButtons'>
+                <input className='imageChooseButton' id="input-file" type="file" accept="image/*" onChange={e => setSelectedImage(e.target.files[0])} />
+                {selectedImage && (
+                  <button className='imageResetButton' type="reset" onClick={handleRemoveImage} >Remove Photo</button>
+                )}
+              </div>
+              {selectedImage && (
+                <div>
+                  <img className='imageBlock' src={URL.createObjectURL(selectedImage)} alt="Selected" />
+                </div>
+              )}
+            </div>
+            <div className="btnSaveNote">
+              <Button className="btnClear" variant="primary" type="reset" onClick={handleClear}>
+                Clear Data
+              </Button>
+              <Button variant="primary" type="submit">
+                Save Note
+              </Button>
+            </div>
+
+          </Form>
+        </div>
       </div>
-{selectedImage && (
-  <div>
-    <img className='imageBlock' src={URL.createObjectURL(selectedImage)} alt="Selected" />
-  </div>   
-)}
-      </div>
-      {/* {uploadProgress > 0 && <p>Upload progress: {uploadProgress}%</p>} */}
-      {/* <img/> */}
-
-
-
-
-      <div className="btnSaveNote">
-      <Button className="btnClear" variant="primary" type="reset" onClick={handleClear}>
-      Clear Data
-      </Button>
-      <Button variant="primary" type="submit">
-      Save Note
-      </Button>
-      </div>
-        
-    </Form>
-    </div>
-    </div>
     </div>
   )
 }

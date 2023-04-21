@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import './Login.css'
 import { Link } from 'react-router-dom';
-import GoogleLogo from '../../assets/Google icon.png';
+// import GoogleLogo from '../../assets/Google icon.png';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import ProfilePic from '../../assets/profile-picture.png';
@@ -16,7 +16,7 @@ function Login() {
   useEffect(() => {
     const storedUsername = localStorage.getItem("email");
     const storedPassword = localStorage.getItem("password");
-  
+
     if (storedUsername && storedPassword) {
       setEmail(storedUsername);
       setPassword(storedPassword);
@@ -69,10 +69,10 @@ function Login() {
     <div className='login'>
       <form onSubmit={handleSubmit}>
         <h3>Login</h3>
-        <img src={ProfilePic} 
-        alt="Header_Logo" 
-        width={'120px'} 
-        style={{marginTop:'0px'}}/>
+        <img src={ProfilePic}
+          alt="Header_Logo"
+          width={'120px'}
+          style={{ marginTop: '0px' }} />
         {/* <button className="googleSignin">
           <img src={GoogleLogo}
             alt="Google_Logo"
@@ -108,17 +108,17 @@ function Login() {
         </div>
 
         <div className="form-check">
-  <input
-    type="checkbox"
-    className="form-check-input"
-    id="rememberMe"
-    checked={rememberMe}
-    onChange={(e) => setRememberMe(e.target.checked)}
-  />
-  <label className="form-check-label" htmlFor="rememberMe">
-    Remember Me
-  </label>
-</div>
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="rememberMe"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
+          <label className="form-check-label" htmlFor="rememberMe">
+            Remember Me
+          </label>
+        </div>
 
         <div className="d-grid">
           <button type="submit" className="btn btn-primary">

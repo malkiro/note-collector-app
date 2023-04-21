@@ -125,3 +125,16 @@ h2#swal2-title {
     }
 }
 
+@media(max-width:595px){
+    .imageSectionButtons {
+        flex-direction: column;
+    }
+    
+    button.imageResetButton {
+        width: 150px;
+        margin-top: 20px;
+    }
+}
+
+
+

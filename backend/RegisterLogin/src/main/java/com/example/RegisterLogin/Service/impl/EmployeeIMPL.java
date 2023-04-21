@@ -7,7 +7,6 @@ import com.example.RegisterLogin.Repo.EmployeeRepo;
 import com.example.RegisterLogin.Service.EmployeeService;
 import com.example.RegisterLogin.response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

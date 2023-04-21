@@ -13,14 +13,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../pages/viewNote/ViewNote.css';
 import './MyNotes.css';
 import NavigationBar from '../../components/navigationBar/NavigationBar';
-import Test from './Test';
+
 
 
 export default function MyNotes() {
-  // const imgURL = 'http://localhost:8080';
-
-  ///////////////////////
+  const { id } = useParams()
+  const [notes, setNotes] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const [note, setNote] = useState({
+    title: "",
+    description: "",
+    file_path: "",
+    date: ""
+  })
+
+  useEffect(() => {
+    loadNotes()
+  }, []);
 
   const handleSearch = async (event) => {
     const searchText = event.target.value;
@@ -33,31 +43,43 @@ export default function MyNotes() {
     }
   };
 
-//
-
-  const [notes, setNotes] = useState([]);
-  const { id } = useParams()
-
-  useEffect(() => {
-    loadNotes()
-  }, []);
-
   const loadNotes = async () => {
     const result = await axios.get('http://localhost:8080/notes');
     setNotes(result.data);
   }
 
 
-  const [note, setNote] = useState({
-    title:"",
-    description:"",
-    file_path: "",
-    date:""
-  })
+  const deleteNote = async (id) => {
+    // Show Swal confirmation dialog for deleting note
+    Swal.fire({
+      title: 'Are you sure to delete?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      closeOnClickOutside: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:8080/note/${id}`)
+          .then(function (response) {
+            Swal.fire({
+              title: 'Note Deleted Successfully',
+              imageUrl: noteDelete,
+              closeOnClickOutside: false,
+            });
+            loadNotes();
+          })
+          .catch(function (error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+            });
+          });
+      }
+    });
+  };
 
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -73,44 +95,10 @@ export default function MyNotes() {
   };
 
 
-  const deleteNote = async (id) => {
-    // Show Swal confirmation dialog for deleting note
-    Swal.fire({
-      title: 'Are you sure to delete?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No',
-      closeOnClickOutside: false,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // If user confirms, delete the note
-        axios.delete(`http://localhost:8080/note/${id}`)
-          .then(function (response) {
-            // Show success Swal alert after successful deletion
-            Swal.fire({
-              title: 'Note Deleted Successfully',
-              imageUrl: noteDelete,
-              closeOnClickOutside: false,
-            });
-            loadNotes(); // Call the loadNotes function if needed
-          })
-          .catch(function (error) {
-            // Show error Swal alert if deletion fails
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-            });
-          });
-      }
-    });
-  };
-
 
   return (
     <div className="myNotes">
-      <NavigationBar/>
+      <NavigationBar />
       {/* Search Field */}
       <div className="searchField">
         <Form className="d-flex">
@@ -121,7 +109,7 @@ export default function MyNotes() {
             aria-label="Search"
             name="title"
             value={searchText}
-        onChange={handleSearch}
+            onChange={handleSearch}
           />
 
           {/* <Button variant="outline-success" onClick={handleSearch}>Search</Button> */}
@@ -144,82 +132,20 @@ export default function MyNotes() {
                 </div>
                 <div className='footer-icons'>
                   <div className='note-foote-icons'>
-                 <Link className="nav-link" to={`/viewnote/${note.id}`}><Button className="btnView" variant="primary" type="submit">See More ...</Button></Link>
-                  {/* <Button className="btnView" variant="primary" type="submit" onClick={handleShow}>See More ...</Button> */}
-                <Link className="nav-link" to={`/editnotes/${note.id}`}><BiEdit size={25} color="#8e05aa" /></Link> {' '}
+                    <Link className="nav-link" to={`/viewnote/${note.id}`}><Button className="btnView" variant="primary" type="submit">See More ...</Button></Link>
+                    {/* <Button className="btnView" variant="primary" type="submit" onClick={handleShow}>See More ...</Button> */}
+                    <Link className="nav-link" to={`/editnotes/${note.id}`}><BiEdit size={25} color="#8e05aa" /></Link> {' '}
                     <RiDeleteBin5Fill size={25} color="#8e05aa" onClick={() => deleteNote(note.id)} />
                     {/* <Test show={show} title={note}/> */}
                   </div>
                 </div>
-                
+
               </div>
-              
+
             </div>
           ))
         }
-
-{/* {
-          notesa.map((note, index) => (
-            <div className="note">
-              <h4>{note.title}</h4>
-              <p>{note.description}</p>
-              <div className='note-footer'>
-                <div className='footer-date'>
-                  <span>Date: </span><span> {note.date} </span>
-                </div>
-                <div className='footer-icons'>
-                  <div className='note-foote-icons'>
-                  <Link className="nav-link" to={`/viewnote/${note.id}`}><Button className="btnView" variant="primary" type="submit">See More ...</Button></Link> 
-                <Link className="nav-link" to={`/editnotes/${note.id}`}><BiEdit size={25} color="#8e05aa" /></Link> {' '}
-                    <RiDeleteBin5Fill size={25} color="#8e05aa" onClick={() => deleteNote(note.id)} />
-                  </div>
-                </div>
-                
-              </div>
-              
-            </div>
-          ))
-        } */}
       </div>
-
-
-
-
-
-
-
-
-
-
-      {/* <div className='viewNote'>
-<Modal
-       size="lg"
-       show={show}
-       onHide={handleClose}
-       backdrop="static"
-       keyboard={false}
-     >
-       <Modal.Header className='modelHeader' closeButton>
-         <Modal.Title><img src={Logo} alt='Logo' /> {note.title}</Modal.Title>
-       </Modal.Header>
-       <Modal.Body className='modelBody'>
-         <div>{note.description}</div>
-       </Modal.Body>
-       <Modal.Footer>
-         <div className="viewFormDate">
-           <span><b>Last Modified: </b>{note.date}</span>
-         </div>
-         <div className="viewFormButtons">
-           <Button variant="secondary" className='btnClose' onClick={handleClose}>Close</Button>
-           <Button variant="danger" onClick={() => deleteNote(note.id)}> Delete</Button>
-         </div>
-       </Modal.Footer>
-     </Modal>
-   </div> */}
     </div>
-
-
-
   )
-
 }
