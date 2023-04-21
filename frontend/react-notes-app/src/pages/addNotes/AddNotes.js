@@ -59,8 +59,8 @@ const onSubmit = async (e)=>{
     setNote({
       title: "",
       description: "",
-      file_path:""
     });
+    setSelectedImage(null);
     Swal.fire({
       title: 'Note Added Successfully',
       imageUrl:noteAdd,

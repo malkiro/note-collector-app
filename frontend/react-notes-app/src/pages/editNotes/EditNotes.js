@@ -18,7 +18,7 @@ export default function EditNotes() {
 
 
   const imgURL = 'http://localhost:8080';
-  const [selectedImage, setSelectedImage] = useState(null);
+  // const [selectedImage, setSelectedImage] = useState(null);
   let navigate=useNavigate()
     const {id} = useParams()
 
@@ -31,8 +31,8 @@ export default function EditNotes() {
 
 const {title, description } = note;
 
-const [imgSrc, setImgSrc] = useState(null);
-
+// const [imgSrc, setImgSrc] = useState(null);
+const [file, setFile] = useState(null);
 
 /////////////////////////////
 
@@ -42,13 +42,39 @@ useEffect(() => {
   }
 }, [note.file_path, imgURL]);
 
-const handleImageChange = e => {
-  const file = e.target.files[0];
-  if (file) {
-    const newImgSrc = URL.createObjectURL(file);
-    setImgSrc(newImgSrc);
-  }
-};
+// useEffect(() => {
+//     const noteId = 1; // set the note ID to retrieve from the server
+//     axios.get(`http://localhost:8080/notes/${noteId}`)
+//       .then(res => {
+//         setImgSrc(`${imgURL}/${note.file_path}`);
+//       })
+//       .catch(err => console.error(err));
+//   }, [note.file_path, imgURL]);
+
+// const handleImageChange = e => {
+//   const file = e.target.files[0];
+//   if (file) {
+//     const newImgSrc = URL.createObjectURL(file);
+//     setImgSrc(newImgSrc);
+//   }
+// };
+
+  
+
+const [imgSrc, setImgSrc] = useState('');
+  const [imgFile, setImgFile] = useState(null);
+  // const [imgURL, setImgURL] = useState('http://localhost:8080');
+
+
+
+  const handleImageChange = (event) => {
+    setImgFile(event.target.files[0]);
+    setImgSrc(URL.createObjectURL(event.target.files[0]));
+  };
+
+
+
+
 
 const handleRemoveImage = () => {
   setImgSrc(null);
@@ -69,30 +95,39 @@ useEffect(() => {
 
 
 
+
 const onSubmit = async (e)=>{
   e.preventDefault();
-  await axios.put(`http://localhost:8080/note/${id}`,note)
-  .then(function (response) {
-    setNote({
-      title: "",
-      description: "",
-      date: "",
-      file_path:""
-    });
-    Swal.fire({
-      title: 'Note Updated Successfully',
-      imageUrl:noteUpdate,
-      closeOnClickOutside: false,
-    }
-    )
-  })
-  .catch(function (error) {
+  try {
+    const formData = new FormData();
+    if (title) formData.append('title', title);
+    if (description) formData.append('description', description);
+    // if (file) formData.append('file_path', file);
+      if (imgFile) formData.append('image', imgFile);
+
+    const res = await axios.put(`http://localhost:8080/note/${id}`, formData)
+    .then(function (response) {
+      setNote({
+        title: "",
+        description: "",
+        date: "",
+        file_path:""
+      });
+      Swal.fire({
+        title: 'Note Updated Successfully',
+        imageUrl:noteUpdate,
+        closeOnClickOutside: false,
+      }
+      )
+    })
+  } catch (err) {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
       text: 'Something went wrong!',
     })
-  });
+  }
+  // // await axios.put(`http://localhost:8080/note/${id}`,note)
   navigate("/mynotes")
 };
 
@@ -139,11 +174,11 @@ const loadEditNote = async () => {
 
       {/* <input type="file" accept="image/*" onChange={e => setSelectedImage(e.target.files[0])} /> */}
       <button type="reset" onClick={handleRemoveImage} >Remove Photo</button>
-{selectedImage && (
+{/* {selectedImage && (
   <div>
     <img src={URL.createObjectURL(selectedImage)} alt="Selected" />
   </div>
-)}
+)} */}
 
       <div className="btnSaveNote">
       <Link className="nav-link" to={"/mynotes"}>

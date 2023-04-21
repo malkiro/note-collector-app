@@ -71,6 +71,63 @@ public class NoteController {
 
 
     @PutMapping("/note/{id}")
+//    public Note updateNote(@PathVariable Long id, @RequestBody Note newNote,
+//                           @RequestParam(value = "title", required = false) String title,
+//                           @RequestParam(value = "description", required = false) String description,
+//    @RequestParam(value = "image", required = false) MultipartFile file) {
+//        if (title != null) {
+//            newNote.setTitle(title);
+//        }
+//        if (description != null) {
+//            newNote.setDescription(description);
+//        }
+//        return noteRepository.findById(id)
+//                .map(note -> {
+//                    note.setTitle(newNote.getTitle());
+//                    note.setDescription(newNote.getDescription());
+//                            if (file != null && !file.isEmpty()) {
+//            String filePath = FOLDER_PATH + file.getOriginalFilename();
+//            try {
+//                file.transferTo(new File(filePath));
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//            note.setFile_path("/images/" + file.getOriginalFilename());
+//        }
+//                    return noteRepository.save(note);
+//                })
+//                .orElseThrow(() -> new NoteNotFoundException(id));
+//    }
+
+
+//        public Note updateNote(@PathVariable Long id, @RequestBody Note newNote,
+//                           @RequestParam(value = "title", required = false) String title,
+//                           @RequestParam(value = "description", required = false) String description,
+//                           @RequestParam(value = "image", required = false) MultipartFile file) throws IOException {
+//        return noteRepository.findById(id)
+//                .map(note -> {
+//                            if (title != null) {
+//            note.setTitle(title);
+//        }
+//
+//        if (description != null) {
+//            note.setDescription(description);
+//        }
+//
+//        if (file != null && !file.isEmpty()) {
+//            String filePath = FOLDER_PATH + file.getOriginalFilename();
+//            try {
+//                file.transferTo(new File(filePath));
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//            note.setFile_path("/images/" + file.getOriginalFilename());
+//        }
+//
+//        return noteRepository.save(note);
+//                }).orElseThrow(()->new NoteNotFoundException(id));
+//    }
+
     public Note updateNote(@PathVariable Long id,
                            @RequestParam(value = "title", required = false) String title,
                            @RequestParam(value = "description", required = false) String description,
@@ -86,10 +143,19 @@ public class NoteController {
             note.setDescription(description);
         }
 
+
+//        if (file != null && !file.isEmpty()) {
+//            String filePath = FOLDER_PATH + file.getOriginalFilename();
+//            file.transferTo(new File(filePath));
+//            note.setFile_path("/images/" + file.getOriginalFilename());
+//        }
+
         if (file != null && !file.isEmpty()) {
             String filePath = FOLDER_PATH + file.getOriginalFilename();
             file.transferTo(new File(filePath));
             note.setFile_path("/images/" + file.getOriginalFilename());
+        } else {
+            note.setFile_path(null); // set file path to null if file is null or empty
         }
 
         return noteRepository.save(note);
