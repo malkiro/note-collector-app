@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     let currentHour = currentDate.getHours();
     if(currentHour < 12) setGreetText("Good Morning!")
-    else if(currentHour < 18) setGreetText("Good Evening")
+    else if(currentHour < 18) setGreetText("Good Afternoon!")
     else setGreetText("Good Evening!")
   }, []);
 

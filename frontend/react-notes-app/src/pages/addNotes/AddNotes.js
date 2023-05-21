@@ -83,8 +83,11 @@ export default function AddNotes() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicContent">
-              <Form.Label>Content</Form.Label>
-              <Form.Control as="textarea" rows={4} placeholder="Note content here...." name="description" value={description} onChange={(e) => onInputChange(e)} />
+              <Form.Label>Content <small className='limitText'>[ {description.length}/255 characters ]</small> </Form.Label>
+              <Form.Control as="textarea" rows={4} placeholder="Note content here...." name="description" value={description}
+                onChange={(e) => onInputChange(e)}
+                maxLength={255}
+              />
             </Form.Group>
 
             <Form.Label>Photo</Form.Label>

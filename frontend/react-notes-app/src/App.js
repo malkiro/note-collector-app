@@ -7,7 +7,7 @@ import Login from './pages/login/Login';
 import EditNotes from './pages/editNotes/EditNotes';
 import ViewNote from './pages/viewNote/ViewNote';
 import SignUp from './pages/signUp/SignUp';
-
+// import Test from './pages/myNotes/Test';
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
         
         <Routes>
           <Route exact path='/' element={<Login/>}></Route>
+          {/* <Route exact path='/' element={<Test/>}></Route> */}
           <Route exact path='/save' element={<SignUp/>}></Route>
           <Route exact path='/home' element={<Home/>}></Route>
           <Route exact path='/addnotes' element={<AddNotes/>}></Route>
