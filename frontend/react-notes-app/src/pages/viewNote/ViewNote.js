@@ -10,7 +10,7 @@ import { IoMdDownload } from "react-icons/io";
 
 function ViewNote() {
   const { id } = useParams()
-  const imgURL = 'http://localhost:8080';
+  const imgURL = 'http://localhost:8080/noteapi/download';
 
   const [note, setNote] = useState({
     title: "",
@@ -33,7 +33,7 @@ function ViewNote() {
   };
 
   const loadNote = async () => {
-    const result = await axios.get(`http://localhost:8080/note/${id}`);
+    const result = await axios.get(`http://localhost:8080/noteapi/note/${id}`);
     setNote(result.data);
   }
 

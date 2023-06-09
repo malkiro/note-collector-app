@@ -8,21 +8,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("noteapi")
 @CrossOrigin(origins = "*")
 public class NoteController {
     @Autowired
     private NoteRepository noteRepository;
 
-    private final String FOLDER_PATH = "E:\\Roshika\\2023 AFSD\\Assignments\\6\\learning-material-note-collector\\backend\\RegisterLogin\\src\\main\\resources\\static\\images/";
+   // private final String FOLDER_PATH = "E:\\Roshika\\2023 AFSD\\Assignments\\6\\learning-material-note-collector\\backend\\RegisterLogin\\src\\main\\resources\\static\\images/";
+    private final String FOLDER_PATH="/F:/Roshika/2023 AFSD/Assignments/file_upload/";
 
 
     @PostMapping("/note")
@@ -39,9 +44,15 @@ public class NoteController {
         note.setTitle(title);
         note.setDescription(description);
         if(filePath != null) {
-            note.setFile_path("/images/" + file.getOriginalFilename());
+            note.setFile_path(file.getOriginalFilename());
         }
         return noteRepository.save(note);
+    }
+
+    @GetMapping("/download/{fileName}")
+    public ResponseEntity<byte[]> downloadImage(@PathVariable String fileName) throws IOException {
+        byte[] image = Files.readAllBytes(new File(FOLDER_PATH+fileName).toPath());
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(image);
     }
 
     /*get all notes*/
@@ -89,7 +100,7 @@ public class NoteController {
         if (file != null && !file.isEmpty()) {
             String filePath = FOLDER_PATH + file.getOriginalFilename();
             file.transferTo(new File(filePath));
-            note.setFile_path("/images/" + file.getOriginalFilename());
+            note.setFile_path(file.getOriginalFilename());
         }
         return noteRepository.save(note);
     }

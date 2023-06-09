@@ -22,7 +22,7 @@ export default function EditNotes() {
   });
 
   const { title, description } = note;
-  const imgURL = 'http://localhost:8080';
+  const imgURL = 'http://localhost:8080/noteapi/download';
   const [imgSrc, setImgSrc] = useState('');
   const [imgFile, setImgFile] = useState(null);
 
@@ -63,7 +63,7 @@ export default function EditNotes() {
       if (note.image) formData.append('image', note.image);
       if (imgFile) formData.append('image', imgFile);
 
-      const res = await axios.put(`http://localhost:8080/note/${id}`, formData)
+      const res = await axios.put(`http://localhost:8080/noteapi/note/${id}`, formData)
         .then(function (response) {
           setNote({
             title: "",
@@ -89,7 +89,7 @@ export default function EditNotes() {
   };
 
   const loadEditNote = async () => {
-    const result = await axios.get(`http://localhost:8080/note/${id}`);
+    const result = await axios.get(`http://localhost:8080/noteapi/note/${id}`);
     setNote(result.data);
   }
 

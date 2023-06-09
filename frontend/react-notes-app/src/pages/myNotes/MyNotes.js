@@ -36,7 +36,7 @@ export default function MyNotes() {
     const searchText = event.target.value;
     setSearchText(searchText);
     try {
-      const response = await axios.get(`http://localhost:8080/search?searchText=${searchText}`);
+      const response = await axios.get(`http://localhost:8080/noteapi/search?searchText=${searchText}`);
       setNotes(response.data);
     } catch (error) {
       console.error(error);
@@ -44,7 +44,7 @@ export default function MyNotes() {
   };
 
   const loadNotes = async () => {
-    const result = await axios.get('http://localhost:8080/notes');
+    const result = await axios.get('http://localhost:8080/noteapi/notes');
     setNotes(result.data);
   }
 
@@ -60,7 +60,7 @@ export default function MyNotes() {
       closeOnClickOutside: false,
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:8080/note/${id}`)
+        axios.delete(`http://localhost:8080/noteapi/note/${id}`)
           .then(function (response) {
             Swal.fire({
               title: 'Note Deleted Successfully',

@@ -30,7 +30,7 @@ export default function AddNotes() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/note", formData)
+    await axios.post("http://localhost:8080/noteapi/note", formData)
       .then(function (response) {
         setNote({
           title: "",
